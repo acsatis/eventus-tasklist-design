@@ -1,0 +1,123 @@
+﻿<Page
+    x:Class="eventus_tasklist_design.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:eventus_tasklist_design"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="using:eventus_tasklist_design.ViewModels"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance Type=viewModels:TaskListPageViewModel}">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <ListView ItemsSource="{Binding Tasks}"
+                  VerticalAlignment="Stretch"
+                  VerticalContentAlignment="Stretch"
+                  HorizontalAlignment="Stretch"
+                  HorizontalContentAlignment="Stretch"
+                  SelectionMode="Single"
+                  >
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="VerticalAlignment" Value="Stretch" />
+                    <Setter Property="HorizontalAlignment" Value="Stretch" />
+                    <Setter Property="VerticalContentAlignment" Value="Stretch" />
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    <Setter Property="Margin" Value="0"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="LightGray" BorderThickness="0,0,0,1">
+                        <Grid>
+                            <Grid Margin="0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="80"/>
+                                </Grid.ColumnDefinitions>
+                                <Border Grid.Column="0" Padding="0,5" Margin="0">
+                                    <Border.Background>
+                                        <SolidColorBrush Color="{Binding PriorityColor}" />
+                                    </Border.Background>
+                                    <Grid VerticalAlignment="Center">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Text="{Binding TicketId}" 
+                                                   HorizontalAlignment="Center"
+                                                   VerticalAlignment="Top"
+                                                   Foreground="White" 
+                                                   Margin="0,5"
+                                                   FontSize="18"
+                                                   Grid.Row="0"/>
+                                        <Viewbox Grid.Row="1" Height="40" Width="40" Margin="5">
+                                            <SymbolIcon Symbol="Admin"/>
+                                        </Viewbox>
+                                        <TextBlock Grid.Row="2" Text="{Binding Priority}" 
+                                               HorizontalAlignment="Center" 
+                                               VerticalAlignment="Bottom"
+                                               Foreground="White" 
+                                               Margin="0,5"
+                                               FontSize="18"/>
+                                    </Grid>
+                                </Border>
+                                <StackPanel Grid.Column="1" Orientation="Vertical">
+                                    <TextBlock Text="{Binding TaskName}"
+                                           Margin="5,0"
+                                           TextWrapping="WrapWholeWords"
+                                           FontSize="18"/>
+                                    <TextBlock Text="{Binding GroupName}"
+                                           Margin="5,1"
+                                           TextWrapping="WrapWholeWords"
+                                           FontSize="16"
+                                           Foreground="Gray"
+                                           />
+                                    <TextBlock Text="{Binding Executor}"
+                                           Margin="5,1"
+                                           TextWrapping="WrapWholeWords"
+                                           FontSize="14"
+                                           Foreground="Gray"
+                                           />
+                                </StackPanel>
+                                <Grid Grid.Column="2">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <StackPanel Grid.Row="0" Orientation="Horizontal" Padding="5" HorizontalAlignment="Right" VerticalAlignment="Top">
+                                        <SymbolIcon Symbol="Save" Margin="2,0" Visibility="{Binding IsSaved}"/>
+                                        <SymbolIcon Symbol="Flag" Margin="2,0" Visibility="{Binding IsError}"/>
+                                        <SymbolIcon Symbol="NewFolder" Margin="2,0" Visibility="{Binding IsNew}"/>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Row="1" Orientation="Horizontal" Padding="5" VerticalAlignment="Bottom">
+                                        <SymbolIcon Symbol="Map" Margin="2,0"/>
+                                        <TextBlock VerticalAlignment="Center">
+                                            <Run Text="{Binding Distance}" />
+                                            <Run Text="km"/>
+                                        </TextBlock>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Row="2" Background="#3f51b5" VerticalAlignment="Bottom">
+                                        <TextBlock Text="{Binding DueDate}" Foreground="White" TextAlignment="Center" FontSize="22"/>
+                                        <TextBlock Text="{Binding DueDateTime}" Foreground="White" TextAlignment="Center"/>
+                                    </StackPanel>
+                                </Grid>
+                                <Border Grid.Column="1" Grid.ColumnSpan="2" Background="Black" Opacity="0.25" Visibility="{Binding IsLocked}" Margin="0"/>
+                                <Viewbox Grid.Column="1" Grid.ColumnSpan="2" MaxHeight="50" MaxWidth="50" Visibility="{Binding IsLocked}">
+                                    <SymbolIcon Symbol="BlockContact" Foreground="White" />
+                                </Viewbox>
+
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Page>

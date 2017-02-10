@@ -1,0 +1,8 @@
+﻿<Application
+    x:Class="eventus_tasklist_design.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:eventus_tasklist_design"
+    RequestedTheme="Light">
+
+</Application>
