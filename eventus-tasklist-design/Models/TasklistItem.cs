@@ -23,6 +23,7 @@ namespace eventus_tasklist_design.Models
         public string Distance { get; set; } = "123";
         public Visibility IsSaved { get; set; } = Visibility.Collapsed;
         public Visibility IsNew { get; set; } = Visibility.Collapsed;
+        public Visibility NegateIsNew { get { return (IsNew == Visibility.Collapsed) ? Visibility.Visible : Visibility.Collapsed; } }
         public Visibility IsLocked { get; set; } = Visibility.Collapsed;
         public Visibility IsError { get; set; } = Visibility.Collapsed;
     }

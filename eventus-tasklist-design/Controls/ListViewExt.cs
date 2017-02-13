@@ -21,9 +21,7 @@ namespace eventus_tasklist_design.Controls
         // Using a DependencyProperty as the backing store for HeaderItemStyle.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty HeaderItemStyleProperty =
             DependencyProperty.Register("HeaderItemStyle", typeof(Style), typeof(ListViewExt), new PropertyMetadata(null));
-
-
-
+        
         public ListViewExt()
         {
             this.Loaded += (sender, args) =>
