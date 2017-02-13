@@ -6,29 +6,60 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="using:eventus_tasklist_design.ViewModels"
+    xmlns:controls="using:eventus_tasklist_design.Controls"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance Type=viewModels:TaskListPageViewModel}">
+    <Page.Resources>
+        <CollectionViewSource x:Key="taskGroupsCVS" IsSourceGrouped="True" Source="{x:Bind ViewModel.GroupedTasks}" />
+    </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <ListView ItemsSource="{Binding Tasks}"
+        <controls:ListViewExt ItemsSource="{Binding Source={StaticResource taskGroupsCVS}}"
                   VerticalAlignment="Stretch"
                   VerticalContentAlignment="Stretch"
                   HorizontalAlignment="Stretch"
                   HorizontalContentAlignment="Stretch"
-                  SelectionMode="Single"
-                  >
-            <ListView.ItemContainerStyle>
+                  SelectionMode="None"
+                  Margin="0"
+                  ScrollViewer.VerticalScrollBarVisibility="Hidden">
+            <controls:ListViewExt.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="VerticalAlignment" Value="Stretch" />
                     <Setter Property="HorizontalAlignment" Value="Stretch" />
                     <Setter Property="VerticalContentAlignment" Value="Stretch" />
                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                     <Setter Property="Margin" Value="0"/>
+                    <Setter Property="Padding" Value="0" />
                 </Style>
-            </ListView.ItemContainerStyle>
-            <ListView.ItemTemplate>
+            </controls:ListViewExt.ItemContainerStyle>
+            <controls:ListViewExt.HeaderItemStyle>
+                <Style TargetType="ListViewHeaderItem">
+                    <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}" />
+                    <Setter Property="FontSize" Value="{ThemeResource ListViewHeaderItemThemeFontSize}" />
+                    <Setter Property="Margin" Value="0"/>
+                    <Setter Property="Padding" Value="0"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    <Setter Property="VerticalContentAlignment" Value="Stretch" />
+                    <Setter Property="UseSystemFocusVisuals" Value="True" />
+                    <Setter Property="MinHeight" Value="0"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListViewHeaderItem">
+                                    <ContentPresenter x:Name="ContentPresenter"
+                                                      Margin="{TemplateBinding Padding}"
+                                                      Content="{TemplateBinding Content}"
+                                                      ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                      ContentTransitions="{TemplateBinding ContentTransitions}"
+                                                      HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                      VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </controls:ListViewExt.HeaderItemStyle>
+            <controls:ListViewExt.ItemTemplate>
                 <DataTemplate>
-                    <Border BorderBrush="LightGray" BorderThickness="0,0,0,1">
+                    <Border BorderBrush="LightGray" BorderThickness="0,1,0,0">
                         <Grid>
                             <Grid Margin="0,0">
                                 <Grid.ColumnDefinitions>
@@ -117,7 +148,19 @@
                         </Grid>
                     </Border>
                 </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+            </controls:ListViewExt.ItemTemplate>
+            <controls:ListViewExt.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate>
+                            <Grid Background="LightGray">
+                                <!--<TextBlock Foreground="Black" FontSize="16" Margin="10,2" Text="{Binding Key}" />-->
+                                <TextBlock Foreground="Black" FontSize="16" Margin="10,2" Text="2017. február 17., szombat" />
+                            </Grid>
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                </GroupStyle>
+            </controls:ListViewExt.GroupStyle>
+        </controls:ListViewExt>
     </Grid>
 </Page>

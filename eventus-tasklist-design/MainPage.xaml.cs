@@ -23,11 +23,15 @@ namespace eventus_tasklist_design
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        public TaskListPageViewModel ViewModel { get; private set; }
+
         public MainPage()
         {
             this.InitializeComponent();
 
-            this.DataContext = new TaskListPageViewModel();
+            ViewModel = new TaskListPageViewModel();
+
+            this.DataContext = ViewModel;
         }
     }
 }

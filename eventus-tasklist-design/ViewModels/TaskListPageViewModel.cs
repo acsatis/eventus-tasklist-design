@@ -11,16 +11,19 @@ namespace eventus_tasklist_design.ViewModels
 {
     public class TaskListPageViewModel
     {
+        public IEnumerable<IGrouping<string, TasklistItem>> GroupedTasks => Tasks.GroupBy<TasklistItem, string>(task => task.DueDate);
+
         public List<TasklistItem> Tasks {
             get => new List<TasklistItem> {
                 new TasklistItem{
                     IsError = Visibility.Visible,
-                    PriorityColor = Color.FromArgb(255,76,175,80)
+                    PriorityColor = Color.FromArgb(255,76,175,80),
+                    DueDate = "ma"
                 },
-                new TasklistItem{
-                    IsLocked = Visibility.Visible,
-                    PriorityColor = Color.FromArgb(255,255,235,59)
-                },
+                //new TasklistItem{
+                //    IsLocked = Visibility.Visible,
+                //    PriorityColor = Color.FromArgb(255,255,235,59)
+                //},
                 new TasklistItem{
                     IsNew = Visibility.Visible,
                     PriorityColor = Color.FromArgb(255,255,152,0)
@@ -42,5 +45,6 @@ namespace eventus_tasklist_design.ViewModels
                 },
             };
         }
+
     }
 }
